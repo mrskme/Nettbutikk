@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Nettbutikk
@@ -13,19 +14,26 @@ namespace Nettbutikk
             Sections = new Sections();
         }
 
-        public void WriteLedZeppelinsAlbums()
+        public void GetSection(string bandName)
         {
-            foreach (var album in Sections.SectionLedZeppelin.Albums)
+            var section = Sections.All.First(S => S.Albums.Any(a => a.Band.Name == bandName));
+            Console.WriteLine($"\nAlbums: ");
+            foreach (var album in section.Albums)
             {
-                Console.WriteLine(album.Band.Name);
-                Console.WriteLine(album.Genre.Name);
-                Console.WriteLine(album.ReleaseDate);
-                foreach (var song in album.Songs)
-                {
-                    Console.WriteLine(song.Name);
-                }
+                Console.Write($"{album.Name}\n");
             }
+            Console.WriteLine("What album do you want?");
+            var command = Console.ReadLine();
+            var chosenAlbum = section.Albums.First(A => A.Name == command);
+            Console.WriteLine(chosenAlbum.WriteAlbum());
             
         }
+
+        public string HandleCommand(string command)
+        {
+            return string.Empty;
+        }
+
+        
     }
 }

@@ -6,18 +6,19 @@ namespace Nettbutikk
 {
     class Sections
     {
-        public List<Section> All;
-        public Section SectionLedZeppelin;
-        public Bands Bands;
+        public List<Section> All { get; }
+        public Section A { get; }
+
+        private Bands Bands;
 
 
         public Sections()
         {
             Bands = new Bands();
-            SectionLedZeppelin = new Section(Bands.LedZeppelin);
+            A = new Section(Bands.LedZeppelin);
             All = new List<Section>()
             {
-                SectionLedZeppelin,
+                A,
             };
         }
     }

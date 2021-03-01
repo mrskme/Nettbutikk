@@ -20,5 +20,11 @@ namespace Nettbutikk
             Genre = genre;
             Songs = songs;
         }
+        public string WriteAlbum()
+        {
+            var str = string.Empty;
+            str += Band.MakeMembersInBandStr();
+            return str;
+        }
     }
 }

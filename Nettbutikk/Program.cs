@@ -8,7 +8,10 @@ namespace Nettbutikk
         static void Main(string[] args)
         {
             var MusicStore = new MusicStore();
-            MusicStore.WriteLedZeppelinsAlbums();
+            Console.WriteLine("Write band name for info");
+            Console.WriteLine("Bands: Led Zeppelin");
+            var command = Console.ReadLine();
+            MusicStore.GetSection(command);
         }
     }
 }

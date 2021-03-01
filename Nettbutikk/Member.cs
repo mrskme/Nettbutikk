@@ -16,5 +16,11 @@ namespace Nettbutikk
             ArtistName = artistName;
             Instrument = instrument;
         }
+
+        public string MakeMemberStr()
+        {
+            var str = $"Name: {Name}\nArtist Name: {ArtistName}\nInstrument: {Instrument.Name}\n";
+            return str;
+        }
     }
 }
