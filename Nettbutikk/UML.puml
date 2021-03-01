@@ -1,0 +1,28 @@
+﻿@startuml
+'' UML
+class Genre {
+
+}
+class Album {
+
+}
+class Albums {
+
+}
+class Band {
+
+}
+class MusicStore {
+
+}
+class Section {
+
+}
+Album -> Albums
+Section -> Sections
+Genre -> Albums
+Band -> Albums
+Albums -> Sections
+Sections -> MusicStore
+
+@enduml
