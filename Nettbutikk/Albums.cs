@@ -19,7 +19,8 @@ namespace Nettbutikk
             Genres = new Genres();
             
 
-            Mothership = new Album("Mothership",2007, Bands.LedZeppelin, Genres.Rock, new List<Song>() {Songs.GoodTimesBadTimes});
+            Mothership = new Album("Mothership",2007, Bands.LedZeppelin, Genres.Rock, new List<Song>() {Songs.GoodTimesBadTimes, Songs.CommunicationBreakdown});
+
             All = new List<Album>
             {
                 Mothership,

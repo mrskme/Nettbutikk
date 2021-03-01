@@ -15,7 +15,17 @@ namespace Nettbutikk
 
         public void WriteLedZeppelinsAlbums()
         {
-            Console.WriteLine(Sections.SectionLedZeppelin.Albums[0].Songs[0].Name);
+            foreach (var album in Sections.SectionLedZeppelin.Albums)
+            {
+                Console.WriteLine(album.Band.Name);
+                Console.WriteLine(album.Genre.Name);
+                Console.WriteLine(album.ReleaseDate);
+                foreach (var song in album.Songs)
+                {
+                    Console.WriteLine(song.Name);
+                }
+            }
+            
         }
     }
 }

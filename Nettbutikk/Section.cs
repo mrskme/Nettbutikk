@@ -13,7 +13,7 @@ namespace Nettbutikk
         public Section(Band band)
         {
             AllAlbums = new Albums();
-            Albums = AllAlbums.All.Where(A => A.Band == band).ToList();
+            Albums = AllAlbums.All.Where(A => A.Band.Name == band.Name).ToList();
         }
     }
 }
