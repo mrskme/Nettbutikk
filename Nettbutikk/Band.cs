@@ -10,13 +10,15 @@ namespace Nettbutikk
         public List<Member> Members;
         public string Country;
         public Genre Genre;
+        public List<Album> Albums;
 
-        public Band(string name, List<Member> members, string country, Genre genre)
+        public Band(string name, List<Member> members, string country, Genre genre, List<Album> albums)
         {
             Name = name;
             Members = members;
             Country = country;
             Genre = genre;
+            Albums = albums;
         }
 
         public string MakeNameStr()
@@ -46,6 +48,16 @@ namespace Nettbutikk
             str += Genre.MakeNameStr();
             str += Genre.MakeVolumLevelStr();
             str += Genre.MakeFeelingStr();
+            return str;
+        }
+
+        public string MakeAllAlbumsString()
+        {
+            var str = string.Empty;
+            foreach (var album in Albums)
+            {
+                str += album.MakeAlbumStr();
+            }
             return str;
         }
     }

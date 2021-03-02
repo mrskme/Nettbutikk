@@ -6,7 +6,7 @@ namespace Nettbutikk
 {
     class Members
     {
-        public List<Member> LedZeppelin;
+        public List<Member> LedZeppelin, Daftpunk;
         public Instruments Instruments; 
 
         public Members()
@@ -15,6 +15,12 @@ namespace Nettbutikk
             LedZeppelin = new List<Member>
             {
                 new Member("James Patrick", "Jimmy Page", Instruments.Guitar),
+                new Member("John Henry Bonham", "John Bonham", Instruments.Drumset),
+            };
+            Daftpunk = new List<Member>
+            {
+                new Member("Thomas Bangalter","Brain Mann", Instruments.KeyBoard),
+                new Member("Guy-Manuel de Homem-Christo", "Rocket Mann", Instruments.DJ),
             };
         }
     }

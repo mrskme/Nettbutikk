@@ -12,5 +12,11 @@ namespace Nettbutikk
         {
             Name = name;
         }
+
+        public string MakeSongStr(int i)
+        {
+            var str = $"Song Nr.{i} {Name}\n";
+            return str;
+        }
     }
 }

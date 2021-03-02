@@ -7,33 +7,22 @@ namespace Nettbutikk
 {
     class MusicStore
     {
-        private Sections Sections;
+        private readonly Sections _sections;
+        private HandleCommand _handleCommand;
 
         public MusicStore()
         {
-            Sections = new Sections();
+            _sections = new Sections();
         }
 
-        public void GetSection(string bandName)
+        public void HandleSelection()
         {
-            var section = Sections.All.First(S => S.Albums.Any(a => a.Band.Name == bandName));
-            Console.WriteLine($"\nAlbums: ");
-            foreach (var album in section.Albums)
-            {
-                Console.Write($"{album.Name}\n");
-            }
-            Console.WriteLine("What album do you want?");
-            var command = Console.ReadLine();
-            var chosenAlbum = section.Albums.First(A => A.Name == command);
-            Console.WriteLine(chosenAlbum.WriteAlbum());
-            
-        }
+            _handleCommand = new HandleCommand();
+            Response sectionSelectionResponse = _handleCommand.HandleSectionSelection(_sections);
+            sectionSelectionResponse.WriteMessage();
 
-        public string HandleCommand(string command)
-        {
-            return string.Empty;
+            Response albumSelectionResponse = _handleCommand.HandleAlbumSelection();
+            albumSelectionResponse.WriteMessage();
         }
-
-        
     }
 }
