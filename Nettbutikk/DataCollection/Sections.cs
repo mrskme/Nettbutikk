@@ -7,6 +7,7 @@ namespace Nettbutikk
 {
     class Sections
     {
+        //Bli kvitt denne klassen? Den er bare et ubrukelig mellomledd i denne versjonen
         public List<Section> All { get; }
         public Section LedZeppelin { get; }
         public Section DaftPunk {get;}

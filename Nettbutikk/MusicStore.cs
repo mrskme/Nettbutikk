@@ -13,7 +13,6 @@ namespace Nettbutikk
         public void MusicSelection()
         {
             _handleCommand = new HandleCommand();
-            string command1;
             while (true)
             {
                 _handleCommand.WriteBands();
@@ -21,7 +20,7 @@ namespace Nettbutikk
                 Console.WriteLine("Write \"General\" to search through all bands for something specified");
                 Console.WriteLine("Write \"Exit\" to exit program");
 
-                command1 = Console.ReadLine();
+                var command1 = Console.ReadLine();
                 if (command1 == "Exit") return;
                 else if (command1 == "Specific")
                 {
@@ -36,6 +35,7 @@ namespace Nettbutikk
                 {
                     Selection(_handleCommand.General);
                 }
+                else Console.WriteLine("This is not a valid command");
             }
         }
 
