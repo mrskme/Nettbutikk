@@ -12,6 +12,7 @@ namespace Nettbutikk
         public InstrumentType String;
         public InstrumentType Percussion;
         public InstrumentType Electronic;
+        public InstrumentType Vocal;
 
         public InstrumentTypes()
         {
@@ -20,6 +21,7 @@ namespace Nettbutikk
             String = new InstrumentType("String");
             Percussion = new InstrumentType("Percussion"); 
             Electronic = new InstrumentType("Electronic");
+            Vocal = new InstrumentType("Vocal");
 
              All = new List<InstrumentType>
             {
@@ -28,6 +30,7 @@ namespace Nettbutikk
                 String,
                 Percussion,
                 Electronic,
+                Vocal,
             };
         }
     }

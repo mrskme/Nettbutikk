@@ -28,7 +28,7 @@ namespace Nettbutikk
             {
                 Mothership,
                 LedZeppelinAlbum,
-            }.OrderBy(A => A.ReleaseDate).ToList();
+            }.OrderBy(a => a.ReleaseDate).ToList();
 
             Homework = new Homework("Home Work", 1997, Genres.Electric);
             DaftPunk = new List<Album> 
@@ -40,11 +40,5 @@ namespace Nettbutikk
                 LedZeppelin, DaftPunk,
             };
         }
-
-        public void GetCorrectAlbum()
-        {
-
-        }
-
     }
 }

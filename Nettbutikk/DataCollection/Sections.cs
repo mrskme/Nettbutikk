@@ -33,7 +33,7 @@ namespace Nettbutikk
             var str = string.Empty;
             foreach (var band in _bands.All)
             {
-                str += band.MakeNameStr();
+                str += "  " + band.MakeNameStr();
             }
             return str;
         }

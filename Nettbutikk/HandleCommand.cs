@@ -18,12 +18,10 @@ namespace Nettbutikk
         {
             _sections = new Sections();
         }
-        public Response HandleSectionSelection()
+        public Response SectionSelection()
         {
-            Console.Write("Choose band to inspect\nBands:\n");
-            var bandNamesStr = _sections.MakeBandNamesStr();
-            Console.Write(bandNamesStr);
-            
+            Console.Write("Choose a band to inspect\n");
+
             var command = Console.ReadLine();
             _currentSection = _sections.GetSection(command);
             string message;
@@ -38,9 +36,7 @@ namespace Nettbutikk
             return new Response(message, true);
         }
 
-        //hvis det er failure kall metoden på nytt med while?
-
-        public Response HandleAlbumSelection()
+        public Response AlbumSelection()
         {
             var albums = $"Albums: \n{_currentBand.MakeAllAlbumsString()}";
             Console.Write(albums + "Choose an album to inspect\n");
@@ -58,7 +54,7 @@ namespace Nettbutikk
             return new Response(message, true);
         }
 
-        public Response HandleMmebersSelection()
+        public Response MemebersSelection()
         {
             var members = $"Members: \n{_currentBand.MameMembersNameString()}";
             Console.Write(members + "Choose an member to inspect\n");
@@ -73,6 +69,24 @@ namespace Nettbutikk
             }
             message = _currentMember.MakeMemberStr();
             return new Response(message, true);
+        }
+
+        public Response General()
+        {
+            //type band to search through all bands, type artist to search through all artists
+            Console.Write("Write \"Instrument band\" to see all bands with a specified instrument\n");
+            Console.Write("Write \"Instrument artist\" to see all artists with a specified instrument\n");
+            Console.Write("Write \"Instrument type band\" to see all bands with a specified instrument type\n");
+            Console.Write("Write \"Instrument type artist\" to see all artists with a specified instrument type\n");
+            //lag kode
+            Console.WriteLine("Write ");
+            return new Response("kake");
+        }
+
+        public void WriteBands()
+        {
+            var bandNamesStr = "Bands:\n" +  _sections.MakeBandNamesStr();
+            Console.Write(bandNamesStr);
         }
     }
 }

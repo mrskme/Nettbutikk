@@ -18,7 +18,7 @@ namespace Nettbutikk
             Teachers,
             HighFidelity,
             RocknRoll,
-            OhYeah,
+            OhYeah
             ;
 
         public Homework(string name, int releaseDate, Genre genre) : base(name, releaseDate, genre)
@@ -51,10 +51,10 @@ namespace Nettbutikk
                 HighFidelity,
                 RocknRoll,
                 OhYeah,
-                Burning,
-                IndoSilverClub,
-                Alive,
-                FunkAd
+                //Burning,
+                //IndoSilverClub,
+                //Alive,
+                //FunkAd
             };
         }
     }
