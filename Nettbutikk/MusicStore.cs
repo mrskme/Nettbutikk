@@ -7,40 +7,37 @@ namespace Nettbutikk
 {
     class MusicStore
     {
-        private readonly Sections _sections;
         private HandleCommand _handleCommand;
 
-        public MusicStore()
-        {
-            _sections = new Sections();
-        }
-
-        public void HandleSelection()
+        public void MusicSelection()
         {
             _handleCommand = new HandleCommand();
-            DoSectionSelection();
-            DoAlbumSelection();
+
+            Selection(_handleCommand.HandleSectionSelection);
+
+            var command = Console.ReadLine();
+            if (command == "Album") Selection(_handleCommand.HandleAlbumSelection);
+            if (command == "Members") Selection(_handleCommand.HandleMmebersSelection);
+
+            //return GoAgain();
         }
 
-        public void DoSectionSelection()
-        {
-            Response sectionSelectionResponse;
-            do
-            {
-                sectionSelectionResponse = _handleCommand.HandleSectionSelection(_sections);
-                sectionSelectionResponse.WriteMessage();
-            } while (!sectionSelectionResponse.IsSuccess);
-        }
+        //private bool GoAgain()
+        //{
+        //    Console.WriteLine("Write \"again\" to go again");
+        //    var command = Console.ReadLine();
+        //    if (command == "again") return true;
+        //    return false;
+        //}
 
-        public void DoAlbumSelection()
+        private void Selection(Func<Response> selectionHandler)
         {
-            Response albumSelectionResponse;
+            Response response;
             do
             {
-                albumSelectionResponse = _handleCommand.HandleAlbumSelection();
-                albumSelectionResponse.WriteMessage();
-            } while (!albumSelectionResponse.IsSuccess);
-            
+                response = selectionHandler();
+                response.WriteMessage();
+            } while (!response.IsSuccess);
         }
     }
 }

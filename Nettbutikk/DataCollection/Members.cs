@@ -16,6 +16,7 @@ namespace Nettbutikk
             {
                 new Member("James Patrick", "Jimmy Page", Instruments.Guitar),
                 new Member("John Henry Bonham", "John Bonham", Instruments.Drumset),
+                new Member("John Richard Baldwin", "John Paul Jones", Instruments.)
             };
             Daftpunk = new List<Member>
             {

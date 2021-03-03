@@ -26,12 +26,12 @@ namespace Nettbutikk
             var str = $"{Name}\n";
             return str;
         }
-        public string MakeMembersInBandStr()
+        public string MameMembersNameString()
         {
             var str = string.Empty;
             foreach (var member in Members)
             {
-                str += member.MakeMemberStr();
+                str += member.MakeMemberNameStr();
             }
             return str;
         }

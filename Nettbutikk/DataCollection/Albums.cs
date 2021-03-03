@@ -23,6 +23,7 @@ namespace Nettbutikk
 
             Mothership = new Mothership("Mothership",2007, Genres.Rock);
             LedZeppelinAlbum = new LedZeppelinAlbum("Led Zeppelin", 1969, Genres.Rock);
+
             LedZeppelin = new List<Album>
             {
                 Mothership,

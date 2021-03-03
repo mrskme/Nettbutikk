@@ -9,7 +9,7 @@ namespace Nettbutikk
     {
         public List<Section> All { get; }
         public Section LedZeppelin { get; }
-        //public Section DaftPunk {get;}
+        public Section DaftPunk {get;}
 
         private readonly Bands _bands;
 
@@ -17,11 +17,11 @@ namespace Nettbutikk
         {
             _bands = new Bands();
             LedZeppelin = new Section(_bands.LedZeppelin);
-            //DaftPunk = new Section(_bands.DaftPunk);
+            DaftPunk = new Section(_bands.DaftPunk);
             All = new List<Section>()
             {
                 LedZeppelin,
-                //DaftPunk,
+                DaftPunk,
             };
         }
 

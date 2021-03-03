@@ -22,5 +22,11 @@ namespace Nettbutikk
             var str = $"Name: {Name}, Artist Name: {ArtistName}, Instrument: {Instrument.Name}\n";
             return str;
         }
+
+        public string MakeMemberNameStr()
+        {
+            var str = $"Name: {Name}\n";
+            return str;
+        }
     }
 }

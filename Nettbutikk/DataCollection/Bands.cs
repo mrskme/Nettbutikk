@@ -16,7 +16,7 @@ namespace Nettbutikk
         {
             Genres = new Genres();
             Members = new Members();
-            Albums = new Albums(); 
+            Albums = new Albums();
             
             LedZeppelin = new Band("Led Zeppelin", Members.LedZeppelin, "England", Genres.Rock, Albums.LedZeppelin);
             DaftPunk = new Band("Daft Punk", Members.Daftpunk, "France", Genres.Electric, Albums.DaftPunk);

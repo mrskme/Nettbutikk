@@ -8,8 +8,11 @@ namespace Nettbutikk
         static void Main(string[] args)
         {
             var MusicStore = new MusicStore();
-
-            MusicStore.HandleSelection();
+            //bool GoAgain;
+            //do
+            //{
+/*                GoAgain = */MusicStore.MusicSelection();
+            //} while (GoAgain);
 
             //funksjon til å hente ut alle som f eks spiller cello
         }

@@ -15,7 +15,7 @@ namespace Nettbutikk
 
         public string MakeSongStr(int i)
         {
-            var str = $"{i} {Name}\n";
+            var str = $"  {i} {Name}\n";
             return str;
         }
     }
