@@ -24,7 +24,6 @@ namespace Nettbutikk
                 sectionSelectionResponse = _handleCommand.HandleSectionSelection(_sections);
                 sectionSelectionResponse.WriteMessage();
             } while (!sectionSelectionResponse.IsSuccess);
-            
 
             Response albumSelectionResponse = _handleCommand.HandleAlbumSelection();
             albumSelectionResponse.WriteMessage();
