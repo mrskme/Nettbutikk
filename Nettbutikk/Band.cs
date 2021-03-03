@@ -23,7 +23,7 @@ namespace Nettbutikk
 
         public string MakeNameStr()
         {
-            var str = $"Band: {Name}\n";
+            var str = $"{Name}\n";
             return str;
         }
         public string MakeMembersInBandStr()

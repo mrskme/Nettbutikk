@@ -9,17 +9,19 @@ namespace Nettbutikk
     {
         public List<Section> All { get; }
         public Section LedZeppelin { get; }
+        //public Section DaftPunk {get;}
 
-        private Bands Bands;
-
+        private readonly Bands _bands;
 
         public Sections()
         {
-            Bands = new Bands();
-            LedZeppelin = new Section(Bands.LedZeppelin);
+            _bands = new Bands();
+            LedZeppelin = new Section(_bands.LedZeppelin);
+            //DaftPunk = new Section(_bands.DaftPunk);
             All = new List<Section>()
             {
                 LedZeppelin,
+                //DaftPunk,
             };
         }
 
@@ -29,11 +31,10 @@ namespace Nettbutikk
         public string MakeBandNamesStr()
         {
             var str = string.Empty;
-            foreach (var band in Bands.All)
+            foreach (var band in _bands.All)
             {
                 str += band.MakeNameStr();
             }
-
             return str;
         }
     }

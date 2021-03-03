@@ -17,9 +17,15 @@ namespace Nettbutikk
             ReleaseDate = releaseDate;
             Genre = genre;
         }
+
+        public string MakeAlbumNameStr()
+        {
+            var str = $"{Name}\n";
+            return str;
+        }
         public string MakeAlbumStr()
         {
-            var str = $"{Name}, Release date: {ReleaseDate}, Genre: {Genre}";
+            var str = $"{Name}\n  Release date: {ReleaseDate}\n  Genre: {Genre.Name}";
             return str;
         }
 

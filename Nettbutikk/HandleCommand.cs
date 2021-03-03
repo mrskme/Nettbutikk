@@ -17,25 +17,20 @@ namespace Nettbutikk
         }
         public Response HandleSectionSelection(Sections sections)
         {
-            Console.WriteLine("Choose band to inspect");
+            Console.Write("Choose band to inspect\nBands:\n");
             var bandNamesStr = sections.MakeBandNamesStr();
             Console.Write(bandNamesStr);
             
-
             var command = Console.ReadLine();
             _currentSection = sections.GetSection(command);
-            _currentBand = _currentSection.Band;
             string message;
             if (_currentSection == null)
             {
                 message = "This section is not available";
                 return new Response(message);
             }
-            //while (_currentSection == null)
-            //{
-            //    message = "This section is not available";
-            //    return new Response(message);
-            //}
+            _currentBand = _currentSection.Band;
+            
             message = $"Albums: \n{_currentBand.MakeAllAlbumsString()}";
             return new Response(message, true);
         }
