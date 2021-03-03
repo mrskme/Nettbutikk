@@ -25,7 +25,7 @@ namespace Nettbutikk
         }
         public string MakeAlbumStr()
         {
-            var str = $"{Name}\n  Release date: {ReleaseDate}\n  Genre: {Genre.Name}";
+            var str = $"{Name}\n  Release date: {ReleaseDate}\n  {Genre.MakeNameStr()}";
             return str;
         }
 

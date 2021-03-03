@@ -26,6 +26,19 @@ namespace Nettbutikk
             CommunicationBreakdown = new Song("Communication Breakdown");
             ICantQuitYouBaby = new Song("I Can't Quit You Baby");
             HowManyMoreTimes = new Song("How Many More Times");
+
+            All = new List<Song>
+            {
+                GoodTimesBadTimes,
+                BabeImGonnaLeaveYou,
+                YouShookMe,
+                DazedandConfused,
+                YourTimeIsGonnaCome,
+                BlackMountainSide,
+                CommunicationBreakdown,
+                ICantQuitYouBaby,
+                HowManyMoreTimes,
+            };
         }
     }
 }

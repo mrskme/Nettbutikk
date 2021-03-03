@@ -18,15 +18,29 @@ namespace Nettbutikk
         public void HandleSelection()
         {
             _handleCommand = new HandleCommand();
+            DoSectionSelection();
+            DoAlbumSelection();
+        }
+
+        public void DoSectionSelection()
+        {
             Response sectionSelectionResponse;
             do
             {
                 sectionSelectionResponse = _handleCommand.HandleSectionSelection(_sections);
                 sectionSelectionResponse.WriteMessage();
             } while (!sectionSelectionResponse.IsSuccess);
+        }
 
-            Response albumSelectionResponse = _handleCommand.HandleAlbumSelection();
-            albumSelectionResponse.WriteMessage();
+        public void DoAlbumSelection()
+        {
+            Response albumSelectionResponse;
+            do
+            {
+                albumSelectionResponse = _handleCommand.HandleAlbumSelection();
+                albumSelectionResponse.WriteMessage();
+            } while (!albumSelectionResponse.IsSuccess);
+            
         }
     }
 }
