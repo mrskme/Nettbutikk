@@ -24,30 +24,44 @@ namespace Nettbutikk
                 if (command1 == "Exit") return;
                 else if (command1 == "Specific")
                 {
-                    //fiks så den kjører igjen hvis man skriver feil
-                    Selection(_handleCommand.SectionSelection);
-                    var command2 = Console.ReadLine();
-                    if (command2 == "Album") Selection(_handleCommand.AlbumSelection);
-                    if (command2 == "Members") Selection(_handleCommand.MemebersSelection);
+                    Specific();
                 }
 
                 else if (command1 == "General")
                 {
-                    Selection(_handleCommand.General);
+                     Selection(_handleCommand.General);
                 }
                 else Console.WriteLine("This is not a valid command");
             }
         }
 
-        private void Selection(Func<Response> selectionHandler)
+        private void Specific()
+        {
+            Selection(_handleCommand.SectionSelection);
+            Response response;
+            do
+            {
+                var command2 = Console.ReadLine();
+                if (command2 == "Album") response = Selection(_handleCommand.AlbumSelection);
+                else if (command2 == "Members") response = Selection(_handleCommand.MemebersSelection);
+                else
+                {
+                    response = new Response("Dette er ikke et godkjent søk");
+                    response.WriteMessage();
+                }
+            } while (!response.IsSuccess);
+        }
+
+        private Response Selection(Func<Response> selectionHandler)
         {
             Response response;
             do
             {
                 response = selectionHandler();
                 response.WriteMessage();
-                response.IsSuccess = true;
             } while (!response.IsSuccess);
+
+            return response;
         }
     }
 }

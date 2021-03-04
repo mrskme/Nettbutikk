@@ -11,8 +11,13 @@ namespace Nettbutikk
         public Genre Genre;
         public List<Song> All;
 
-        public Album(string name, int releaseDate, Genre genre)
+        public Album(List<string> Songs, string name, int releaseDate, Genre genre)
         {
+            All = new List<Song>();
+            foreach (var song in Songs)
+            {
+                All.Add(new Song(song));
+            }
             Name = name;
             ReleaseDate = releaseDate;
             Genre = genre;

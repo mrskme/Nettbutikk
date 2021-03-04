@@ -31,14 +31,14 @@ namespace Nettbutikk
                 return new Response(message);
             }
             _currentBand = _currentSection.Band;
-            
-            message = "Write \"Album\" to see albums\nWrite \"Members\" to see members of the band\n";
+            message = $"{_currentBand.MakeCountryStr()}{_currentBand.MakeFullGenreStr()}\n";
+            message += "Write \"Album\" to see albums\nWrite \"Members\" to see members of the band\n";
             return new Response(message, true);
         }
 
         public Response AlbumSelection()
         {
-            var albums = $"Albums: \n{_currentBand.MakeAllAlbumsString()}";
+            var albums = $"Albums: \n{_currentBand.MakeAllAlbumsString()}\n";
             Console.Write(albums + "Choose an album to inspect\n");
             var command = Console.ReadLine();
             _currentAlbum = _currentBand.Albums.FirstOrDefault(A => A.Name == command);
@@ -73,14 +73,88 @@ namespace Nettbutikk
 
         public Response General()
         {
-            //type band to search through all bands, type artist to search through all artists
-            Console.Write("Write \"Instrument band\" to see all bands with a specified instrument\n");
-            Console.Write("Write \"Instrument artist\" to see all artists with a specified instrument\n");
-            Console.Write("Write \"Instrument type band\" to see all bands with a specified instrument type\n");
-            Console.Write("Write \"Instrument type artist\" to see all artists with a specified instrument type\n");
-            //lag kode
-            Console.WriteLine("Write ");
+            Console.Write("Write \"Band\" to search through all bands after specified condition\n");
+            Console.Write("Write \"Artist\" to search through all bands after specified condition\n");
+            Console.Write("Write \"Album\" to search through all bands after specified condition\n");
+
+            var command1 = Console.ReadLine();
+            if (command1 == "Band")
+            {
+                Console.Write("Search through all bands to see which bands has what\n"); 
+                Console.Write("Write \"Instrument\" to search for instruments\n"); 
+                Console.Write("Write \"Instrument type\" to search for instrument types\n"); 
+                Console.Write("Write \"Member\" to search for member(s)\n");
+                var response = GeneralBandLoop();
+                return response;
+            }
+            if (command1 == "Artist") return new Response("asd");
+            if (command1 == "Album") return new Response("asd");
+                //lag kode
+
             return new Response("kake");
+        }
+
+        public Response GeneralBandLoop()
+        {
+            
+            Response response;
+            do
+            {
+                response = GeneralBand();
+                response.WriteMessage();
+            } while (!response.IsSuccess);
+
+            return response;
+        }
+
+        private Response GeneralBand()
+        {
+            var command2 = Console.ReadLine();
+            if (command2 == "Instrument")
+            {
+                var response = GeneralBandInstrument();
+                return response;
+            }
+
+            if (command2 == "Instrument type")
+            {
+                var response = GeneralBandInstrumentType();
+                return response;
+            }
+
+            if (command2 == "Member")
+            {
+                var response = GeneralBandMember();
+                return response;
+            }
+
+            return new Response("Incorrect command");
+        }
+
+        private Response GeneralBandMember()
+        {
+            Console.Write("Write the name of am music artist you want to search for");
+            var command3 = Console.ReadLine();
+            //DosStuff3(command3)
+            return new Response("AllMembers",true);
+        }
+
+        private Response GeneralBandInstrumentType()
+        {
+            Console.Write("Write the instrument type to search for");
+            //console write all instrument types
+            var command3 = Console.ReadLine();
+            //DosStuff2(command3)
+            return new Response("asdasd",true);
+        }
+
+        private  Response GeneralBandInstrument()
+        {
+            Console.Write("Write the name of an instrument to search for");
+            //Console write all instruments
+            var command3 = Console.ReadLine();
+            //DosStuff¨1(command3)
+            return new Response("asdasd");
         }
 
         public void WriteBands()
