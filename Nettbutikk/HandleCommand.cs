@@ -7,30 +7,89 @@ namespace Nettbutikk
 {
     class HandleCommand
     {
-        private readonly Sections _sections;
+        protected readonly Bands _bands;
 
-        private Section _currentSection;
-        private Band _currentBand;
-        private Album _currentAlbum;
-        private Member _currentMember;
+        protected Band _currentBand;
+        protected Album _currentAlbum;
+        protected Member _currentMember;
+
+        protected string CurrentCommand;
 
         public HandleCommand()
         {
-            _sections = new Sections();
+            _bands = new Bands();
         }
-        public Response SectionSelection()
+        public void RunUI()
+        {
+            while (true)
+            {
+                WriteBands();
+                Console.WriteLine("Write \"Specific\" to go into a specified band");
+                Console.WriteLine("Write \"General\" to search through all bands for something specified");
+                Console.WriteLine("Write \"Exit\" to exit program");
+
+                var command1 = Console.ReadLine();
+                if (command1 == "Exit") return;
+                else if (command1 == "Specific")
+                {
+                    LoopTilSuccess(Specific);
+                }
+
+                else if (command1 == "General")
+                {
+                    LoopTilSuccess(General);
+                }
+                else Console.WriteLine("This is not a valid command");
+            }
+        }
+        public Response Specific()
+        {
+            LoopTilSuccess(BandSelection);
+            Response response;
+
+            var command2 = Console.ReadLine();
+            if (command2 == "Album") response = LoopTilSuccess(AlbumSelection);
+            else if (command2 == "Members") response = LoopTilSuccess(MemebersSelection);
+            else response = new Response("This is not a valid search");
+
+            return response;
+        }
+        public Response General()
+        {
+            Console.Write("Write \"Band\" to search through all bands after specified condition\n" +
+                          "Write \"Artist\" to search through all bands after specified condition\n" +
+                          "Write \"Album\" to search through all bands after specified condition\n");
+
+            var command1 = Console.ReadLine();
+            if (command1 == "Band")
+            {
+                Console.Write("Search through all bands to see which bands has what\n" +
+                              "Write \"Instrument\" to search for instruments\n" +
+                              "Write \"Instrument type\" to search for instrument types\n" +
+                              "Write \"Music artist\" to search for member(s)\n");
+
+                var response = LoopTilSuccess(GeneralBand);
+                return response;
+            }
+            if (command1 == "Artist") return new Response("asd");
+            if (command1 == "Album") return new Response("asd");
+            //lag kode
+
+            return new Response("This is not a valid command");
+        }
+        public Response BandSelection()
         {
             Console.Write("Choose a band to inspect\n");
 
             var command = Console.ReadLine();
-            _currentSection = _sections.GetSection(command);
+            var band = _bands.GetBand(command);
             string message;
-            if (_currentSection == null)
+            if (band == null)
             {
-                message = "This section is not available";
+                message = "This band is not available";
                 return new Response(message);
             }
-            _currentBand = _currentSection.Band;
+            _currentBand = band;
             message = $"{_currentBand.MakeCountryStr()}{_currentBand.MakeFullGenreStr()}\n";
             message += "Write \"Album\" to see albums\nWrite \"Members\" to see members of the band\n";
             return new Response(message, true);
@@ -70,46 +129,24 @@ namespace Nettbutikk
             message = _currentMember.MakeMemberStr();
             return new Response(message, true);
         }
-
-        public Response General()
+        //12312312
+        public Response LoopTilSuccess(Func<Response> selectionHandler)
         {
-            Console.Write("Write \"Band\" to search through all bands after specified condition\n");
-            Console.Write("Write \"Artist\" to search through all bands after specified condition\n");
-            Console.Write("Write \"Album\" to search through all bands after specified condition\n");
-
-            var command1 = Console.ReadLine();
-            if (command1 == "Band")
-            {
-                Console.Write("Search through all bands to see which bands has what\n"); 
-                Console.Write("Write \"Instrument\" to search for instruments\n"); 
-                Console.Write("Write \"Instrument type\" to search for instrument types\n"); 
-                Console.Write("Write \"Member\" to search for member(s)\n");
-                var response = GeneralBandLoop();
-                return response;
-            }
-            if (command1 == "Artist") return new Response("asd");
-            if (command1 == "Album") return new Response("asd");
-                //lag kode
-
-            return new Response("kake");
-        }
-
-        public Response GeneralBandLoop()
-        {
-            
             Response response;
             do
             {
-                response = GeneralBand();
+                response = selectionHandler();
                 response.WriteMessage();
             } while (!response.IsSuccess);
 
             return response;
         }
+        //123123123
 
         private Response GeneralBand()
         {
             var command2 = Console.ReadLine();
+            CurrentCommand = command2;
             if (command2 == "Instrument")
             {
                 var response = GeneralBandInstrument();
@@ -122,21 +159,33 @@ namespace Nettbutikk
                 return response;
             }
 
-            if (command2 == "Member")
+            if (command2 == "Music artist")
             {
-                var response = GeneralBandMember();
+                var response = LoopTilSuccess(GeneralBandMembersSearch);
                 return response;
             }
 
             return new Response("Incorrect command");
         }
 
-        private Response GeneralBandMember()
+        private Response GeneralBandMembersSearch() //Denne writer message i LoopTilSuccess flere ganger
         {
-            Console.Write("Write the name of am music artist you want to search for");
-            var command3 = Console.ReadLine();
-            //DosStuff3(command3)
-            return new Response("AllMembers",true);
+            Console.Write($"Write the name of the {CurrentCommand} you want to search for");
+            List<Band> bands;
+            do
+            {
+                var command3 = Console.ReadLine();
+                bands = _bands.All.FindAll(b => b.Members.Any(m =>
+                    command3 != null && (string.Equals(m.Name.ToLower(), command3.ToLower()) ||
+                                         string.Equals(m.ArtistName.ToLower(), command3.ToLower())))); // select? 
+
+            } while (bands.Count >= 1);
+            var searchResult = string.Empty;
+            foreach (var band in bands)
+            {
+                searchResult += band.MakeNameStr();
+            }
+            return new Response(searchResult, true);
         }
 
         private Response GeneralBandInstrumentType()
@@ -159,7 +208,7 @@ namespace Nettbutikk
 
         public void WriteBands()
         {
-            var bandNamesStr = "Bands:\n" +  _sections.MakeBandNamesStr();
+            var bandNamesStr = "Bands:\n" +  _bands.MakeBandNamesStr();
             Console.Write(bandNamesStr);
         }
     }

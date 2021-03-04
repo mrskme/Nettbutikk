@@ -10,58 +10,39 @@ namespace Nettbutikk
     {
         private HandleCommand _handleCommand;
 
-        public void MusicSelection()
+        public void RunUI()
         {
             _handleCommand = new HandleCommand();
-            while (true)
-            {
-                _handleCommand.WriteBands();
-                Console.WriteLine("Write \"Specific\" to go into a specified band");
-                Console.WriteLine("Write \"General\" to search through all bands for something specified");
-                Console.WriteLine("Write \"Exit\" to exit program");
-
-                var command1 = Console.ReadLine();
-                if (command1 == "Exit") return;
-                else if (command1 == "Specific")
-                {
-                    Specific();
-                }
-
-                else if (command1 == "General")
-                {
-                     Selection(_handleCommand.General);
-                }
-                else Console.WriteLine("This is not a valid command");
-            }
+            _handleCommand.RunUI();
         }
 
-        private void Specific()
-        {
-            Selection(_handleCommand.SectionSelection);
-            Response response;
-            do
-            {
-                var command2 = Console.ReadLine();
-                if (command2 == "Album") response = Selection(_handleCommand.AlbumSelection);
-                else if (command2 == "Members") response = Selection(_handleCommand.MemebersSelection);
-                else
-                {
-                    response = new Response("Dette er ikke et godkjent søk");
-                    response.WriteMessage();
-                }
-            } while (!response.IsSuccess);
-        }
+        //private void Specific()
+        //{
+        //    LoopTilSuccess(_handleCommand.BandSelection);
+        //    Response response;
+        //    do
+        //    {
+        //        var command2 = Console.ReadLine();
+        //        if (command2 == "Album") response = LoopTilSuccess(_handleCommand.AlbumSelection);
+        //        else if (command2 == "Members") response = LoopTilSuccess(_handleCommand.MemebersSelection);
+        //        else
+        //        {
+        //            response = new Response("This is not a valid search");
+        //            response.WriteMessage();
+        //        }
+        //    } while (!response.IsSuccess);
+        //}
 
-        private Response Selection(Func<Response> selectionHandler)
-        {
-            Response response;
-            do
-            {
-                response = selectionHandler();
-                response.WriteMessage();
-            } while (!response.IsSuccess);
+        //private Response LoopTilSuccess(Func<Response> selectionHandler)
+        //{
+        //    Response response;
+        //    do
+        //    {
+        //        response = selectionHandler();
+        //        response.WriteMessage();
+        //    } while (!response.IsSuccess);
 
-            return response;
-        }
+        //    return response;
+        //}
     }
 }

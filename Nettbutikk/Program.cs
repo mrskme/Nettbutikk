@@ -11,7 +11,7 @@ namespace Nettbutikk
             //bool GoAgain;
             //do
             //{
-/*                GoAgain = */MusicStore.MusicSelection();
+/*                GoAgain = */MusicStore.RunUI();
             //} while (GoAgain);
 
             //funksjon til å hente ut alle som f eks spiller cello

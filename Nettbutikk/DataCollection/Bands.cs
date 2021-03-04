@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Nettbutikk
@@ -26,6 +27,17 @@ namespace Nettbutikk
                 LedZeppelin, 
                 DaftPunk,
             };
+        }
+        public Band GetBand(string command)
+            => All.FirstOrDefault(b => b.Name == command);
+        public string MakeBandNamesStr()
+        {
+            var str = string.Empty;
+            foreach (var band in All)
+            {
+                str += "  " + band.MakeNameStr();
+            }
+            return str;
         }
     }
 }
