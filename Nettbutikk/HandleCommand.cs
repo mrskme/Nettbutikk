@@ -179,7 +179,7 @@ namespace Nettbutikk
                     command3 != null && (string.Equals(m.Name.ToLower(), command3.ToLower()) ||
                                          string.Equals(m.ArtistName.ToLower(), command3.ToLower())))); // select? 
 
-            } while (bands.Count >= 1);
+            } while (bands.Count > 0); //Wtf bands.count == 0 men den looper ikke? 
             var searchResult = string.Empty;
             foreach (var band in bands)
             {
