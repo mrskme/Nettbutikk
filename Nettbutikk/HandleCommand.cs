@@ -77,6 +77,17 @@ namespace Nettbutikk
 
             return new Response("This is not a valid command");
         }
+        public Response LoopTilSuccess(Func<Response> selectionHandler)
+        {
+            Response response;
+            do
+            {
+                response = selectionHandler();
+                response.WriteMessage();
+            } while (!response.IsSuccess);
+
+            return response;
+        }
         public Response BandSelection()
         {
             Console.Write("Choose a band to inspect\n");
@@ -129,19 +140,6 @@ namespace Nettbutikk
             message = _currentMember.MakeMemberStr();
             return new Response(message, true);
         }
-        //12312312
-        public Response LoopTilSuccess(Func<Response> selectionHandler)
-        {
-            Response response;
-            do
-            {
-                response = selectionHandler();
-                response.WriteMessage();
-            } while (!response.IsSuccess);
-
-            return response;
-        }
-        //123123123
 
         private Response GeneralBand()
         {
@@ -172,15 +170,14 @@ namespace Nettbutikk
         {
             Console.Write($"Write the name of the {CurrentCommand} you want to search for");
             List<Band> bands;
-            do
-            {
-                var command3 = Console.ReadLine();
+            var command3 = Console.ReadLine();
                 bands = _bands.All.FindAll(b => b.Members.Any(m =>
                     command3 != null && (string.Equals(m.Name.ToLower(), command3.ToLower()) ||
                                          string.Equals(m.ArtistName.ToLower(), command3.ToLower())))); // select? 
 
-            } while (bands.Count > 0); //Wtf bands.count == 0 men den looper ikke? 
+            //Wtf bands.count == 0 men den looper ikke? 
             var searchResult = string.Empty;
+            if (bands.Count == 0) return new Response("Invalid command");
             foreach (var band in bands)
             {
                 searchResult += band.MakeNameStr();
